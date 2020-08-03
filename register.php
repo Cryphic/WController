@@ -102,6 +102,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <title>Register An Account</title>
     <style>
@@ -127,8 +128,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <div class="row">
         <div class="col-md-6 mx-auto">
             <div class="card card-body bg-light mt-5">
-                <h2>Create Account</h2>
-                <p>Fill in this form to register</p>
+                <h1 class="display-4"><img width="128" height="128" src="https://img.icons8.com/?id=rJe96vXFGcP6&amp;size=128&amp;token=&amp;format=png&amp;fromSite=true&amp;color=000000"> WController</h1>
+
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -153,7 +154,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
                     <div class="form-row">
                         <div class="col">
-                            <input type="submit" value="Register" class="btn btn-success btn-block">
+                            <input type="submit" value="Register" class="btn btn-primary btn-block">
                         </div>
                         <div class="col">
                             <a href="login.php" class="btn btn-light btn-block">Have an account? Login</a>
