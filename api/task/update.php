@@ -34,6 +34,13 @@ $task->output = $data->output;
 $task->status = $data->status;
 $task->user_id = $data->user_id;
 
+if(!file_get_contents('php://input')) {
+    http_response_code(503);
+
+    echo json_encode(array("message" => "Input is empty"));
+    exit;
+}
+
 if($task->update($_SESSION['id'])) {
     http_response_code(200);
 
