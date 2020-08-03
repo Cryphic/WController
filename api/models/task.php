@@ -1,23 +1,25 @@
 <?php
-// Include db config
+
 
 
 class Task{
-    // database connection and table name
+
     private $conn;
     private $table = 'tasks';
 
 
-    // constructor with $db as database connection
+
     public function __construct($db){
         $this->conn = $db;
     }
 
-    // object properties
+
     public $id;
     public $hostname;
     public $action;
     public $parameters;
+    public $output;
+    public $status;
     public $user_id;
 
     public function read($nmb){
@@ -29,6 +31,25 @@ class Task{
         $stmt->execute();
 
         return $stmt;
+    }
+
+    public function update($nmb) {
+        $query = "UPDATE tasks SET output = :output, status = :status WHERE user_id = :userid AND id = :id";
+
+        $stmt = $this->conn->prepare($query);
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $this->output = htmlspecialchars(strip_tags($this->output));
+        $this->status = htmlspecialchars(strip_tags($this->status));
+
+        $stmt->bindParam(':id', $this->id, PDO::PARAM_STR);
+        $stmt->bindParam(':userid', $nmb, PDO::PARAM_STR);
+        $stmt->bindParam(':output', $this->output, PDO::PARAM_STR);
+        $stmt->bindParam(':status', $this->status, PDO::PARAM_STR);
+
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
 }
 ?>

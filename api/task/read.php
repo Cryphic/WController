@@ -6,10 +6,10 @@ header('Content-Type: application/json');
 include_once '../../config/database.php';
 include_once '../models/task.php';
 
-// Init session
+
 session_start();
 
-// Validate login
+
 if(!isset($_SESSION['email']) || empty($_SESSION['email'])){
     header('location: ../../login.php');
     exit;
@@ -21,10 +21,10 @@ $pdo = $databaseConnect->getPdo();
 
 $task = new Task($pdo);
 
-//task query
+
 $result = $task->read($_SESSION['id']);
 
-//get row count
+
 $num = $result->rowCount();
 
 if($num > 0 ) {
@@ -38,6 +38,8 @@ if($num > 0 ) {
             'hostname' => $hostname,
             'action' => $action,
             'parameters' => $parameters,
+            'output' => $output,
+            'status' => $status,
             'user_id' => $user_id
         );
         array_push($post_arr['data'], $post_item);
@@ -45,7 +47,7 @@ if($num > 0 ) {
     }
     echo json_encode($post_arr);
 }else{
-    //No post
+
     echo json_encode(array(
         'message' => 'No tasks found'
     ));
